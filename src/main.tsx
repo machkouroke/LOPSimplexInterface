@@ -6,12 +6,13 @@ import './index.css'
 
 let placebo;
 let docs;
-await fetch(`http://localhost:5173/placebo.yaml`).then(
+await fetch(`${import.meta.env.BASE_URL}/placebo.yaml`).then(
     (response) => response.text()
 ).then(
     (text) => {placebo = text}
 )
-await fetch("http://localhost:5173/doc.md").then(
+
+await fetch(`${import.meta.env.BASE_URL}/doc.md`).then(
     (response) => response.text()
 ).then(
     (text) => {docs = text}

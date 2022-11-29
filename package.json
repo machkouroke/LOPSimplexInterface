@@ -10,6 +10,7 @@
     "deploy": "gh-pages -d dist",
     "build": "vite build",
     "preview": "vite preview",
+    "serve": "vite build && vite preview",
     "test: jest": "jest --passWithNoTests --updateSnapshot --coverage"
   },
   "dependencies": {

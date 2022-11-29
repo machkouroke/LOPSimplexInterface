@@ -46,7 +46,6 @@ export default function App(props: {
                     ref={wrapperRef}
                 >
 
-
                     <div
                         className="container"
                         style={{

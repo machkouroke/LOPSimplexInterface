@@ -14,7 +14,7 @@ coefficients, vous deviez indiquer leur coefficient
 
 ### Quelques examples
 #### Cas ou le système est homogène
-```yaml
+```
 type: max
 n: 2
 p: 3
