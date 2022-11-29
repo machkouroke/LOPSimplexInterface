@@ -1,12 +1,13 @@
 {
   "name": "lopsimplex",
-  "homepage": "https://machkouroke.github.io/LOPSimplexInterface/",
+  "homepage": "https://lopuniverse.me/LOPSimplexInterface/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "deploy": "gh-pages -d build",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d dist",
     "build": "vite build",
     "preview": "vite preview",
     "test: jest": "jest --passWithNoTests --updateSnapshot --coverage"
