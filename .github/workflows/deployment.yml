@@ -1,0 +1,29 @@
+# This script deploys your website automatically
+name: Deployment
+
+# Only trigger this script when you push to the master branch
+on:
+  push:
+    branches: [ main ]
+
+# Specify the tasks to run when this script gets triggered
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # Download our master branch
+    steps:
+      - uses: actions/checkout@v2
+      - uses: CultureHQ/actions-yarn@v1.0.1
+
+      # Run our deployment command
+      - name: Install dependencies
+        working-directory: ./src
+        run: "yarn install"
+      - name: Deploy
+        env:
+          CI: ""
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          yarn deploy -- -u "github-actions-bot <support+actions@github.com>"
