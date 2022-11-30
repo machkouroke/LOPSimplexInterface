@@ -1,10 +1,13 @@
 import {BsCloudUpload, BsDownload} from "react-icons/bs";
 import {downloadImage} from "../utils.ts/downloadImage";
+import {compute} from "../utils.ts/action";
 import {useRef} from "react";
 import "./style/buttons.css"
 import {AiTwotoneSetting} from "react-icons/all";
+
 export const OptionButton = () => {
     const wrapperRef = useRef<HTMLDivElement>(null);
+
     return (
         <div className={"buttons py-4"}>
             <div
@@ -22,9 +25,8 @@ export const OptionButton = () => {
                 Load
             </div>
             <div
-                className="menu-item bg-success text-white"
-                onClick={() => downloadImage(wrapperRef.current)}
-
+                className="menu-item bg-success text-white shadow rounded-4"
+                onClick={() => compute()}
             >
                 <AiTwotoneSetting size={20}/>
                 Compute

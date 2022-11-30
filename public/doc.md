@@ -25,3 +25,5 @@ constraints: |
   8 5 6
 inequality: <=
 ```
+
+![img.png](img.png)

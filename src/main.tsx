@@ -6,12 +6,14 @@ import './index.css'
 
 let placebo;
 let docs;
+// @ts-ignore
 await fetch(`${import.meta.env.BASE_URL}/placebo.yaml`).then(
     (response) => response.text()
 ).then(
     (text) => {placebo = text}
 )
 
+// @ts-ignore
 await fetch(`${import.meta.env.BASE_URL}/doc.md`).then(
     (response) => response.text()
 ).then(

@@ -34,6 +34,7 @@ export const CodeEditor = ({content}: CodeEditorProps) => {
         </Highlight>
     );
 
+    // @ts-ignore
     return (
         <Editor
             value={code}
@@ -42,7 +43,6 @@ export const CodeEditor = ({content}: CodeEditorProps) => {
             padding={10}
             textareaClassName={"code-editor"}
             style={CodeEditorStyle.root}
-
         />
     );
 };
