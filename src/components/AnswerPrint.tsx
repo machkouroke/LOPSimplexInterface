@@ -9,8 +9,6 @@ import Paper from '@mui/material/Paper';
 import Markdown from "./Markdown.component";
 
 
-
-
 const columns = ["$x_1$", "$x_2$", "$x_3$",
     "$e_1$", "$B$"];
 
@@ -23,7 +21,6 @@ const rows = [
 
 export default function AnswerPrint() {
     return (
-
         <TableContainer component={Paper}>
             <Table sx={{minWidth: 650}} size="small" aria-label="a dense table">
                 <TableHead>
@@ -43,14 +40,13 @@ export default function AnswerPrint() {
                                 {<Markdown>{row[0]}</Markdown>}
                             </TableCell>
                             {row.slice(1).map((value) => (
-                            <TableCell align="right">{value}</TableCell>
+                                <TableCell align="right">{value}</TableCell>
                             ))}
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
         </TableContainer>
-
 
     );
 }

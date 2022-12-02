@@ -1,22 +1,16 @@
 import {useRef, useState} from "react";
 import "./App.css";
-import {copyImage} from "./utils.ts/copyImage";
 import {CodeEditor} from "./components/CodeEditor";
 import {OptionButton} from "./components/buttons";
-import {BsSun, BsMoonFill, BsDownload, BsCodeSlash} from "react-icons/bs";
-import {BiCopy} from "react-icons/bi";
 import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import {
     CodeEditorStyle,
     DEFAULT_WRAPPER_WIDTH,
-    LANGUAGES,
-    DocsStyle,
-    Theme,
+    DocsStyle
 } from "./utils.ts/constant";
 import {useMouseMove} from "./hooks/useMouseMove";
-import {downloadImage} from "./utils.ts/downloadImage";
 import {Docs} from "./components/docs";
 
 
@@ -25,7 +19,6 @@ export default function App(props: {
     editor: any;
 }) {
 
-    const [selectedLanguage, setSelectedLanguage] = useState(LANGUAGES[0].value);
     const [wrapperWidth, setWrapperWidth] = useState(DEFAULT_WRAPPER_WIDTH);
     const isDarkTheme = props.editor;
     const wrapperRef = useRef<HTMLDivElement>(null);

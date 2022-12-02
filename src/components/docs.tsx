@@ -5,9 +5,9 @@ import "./style/docs.css"
 import 'katex/dist/katex.min.css'
 import Markdown from "./Markdown.component";
 import AnswerPrint from "./AnswerPrint";
-import {BsCloudUpload, BsDownload} from "react-icons/bs";
+import {BsCloudUpload} from "react-icons/bs";
 import {GrDocumentText} from "react-icons/all";
-import {downloadImage} from "../utils.ts/downloadImage";
+
 import {flipFront} from "../utils.ts/action";
 
 type CodeEditorProps = {
@@ -15,7 +15,7 @@ type CodeEditorProps = {
     content: string;
 };
 
-export const Docs = ({isDarkTheme, content}: CodeEditorProps) => {
+export const Docs = ({content}: CodeEditorProps) => {
 
     const [code, setCode] = useState(content);
     return (
