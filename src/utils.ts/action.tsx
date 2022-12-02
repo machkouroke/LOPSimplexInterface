@@ -7,7 +7,8 @@ export const compute = () => {
         console.log('No script provided: ' + script);
         return;
     }
-    // simplexArrayBlock?.appendChild(<AnswerPrint script={content}></AnswerPrint>);
+    window.printer.compute(script);
+    console.log(window.printer)
     flipBack(answerBlock);
 };
 

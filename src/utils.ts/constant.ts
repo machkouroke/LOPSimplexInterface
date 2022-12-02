@@ -32,6 +32,7 @@ export const DocsStyle = {
 
     backgroundColor: "inherit",
     height: '400px',
+    textAlign: "justify",
     overflowY: "auto",
     perspective: "1000px"
   },
