@@ -1,11 +1,13 @@
+import AnswerPrint from "../components/AnswerPrint";
 export const compute = () => {
     const script = document.querySelector(".code-editor")?.textContent;
     const answerBlock = document.querySelector(".flip-box-inner");
+    const simplexArrayBlock = document.querySelector(".flip-box-back");
     if (!script) {
         console.log('No script provided: ' + script);
         return;
     }
-    console.log(script);
+    // simplexArrayBlock?.appendChild(<AnswerPrint script={content}></AnswerPrint>);
     flipBack(answerBlock);
 };
 

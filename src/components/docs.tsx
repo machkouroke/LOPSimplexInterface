@@ -42,7 +42,7 @@ export const Docs = ({content}: CodeEditorProps) => {
                         </div>
 
                     </div>
-                    <AnswerPrint></AnswerPrint>
+                    <AnswerPrint script={content}></AnswerPrint>
                 </div>
             </div>
         </div>
