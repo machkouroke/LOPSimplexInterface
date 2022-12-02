@@ -31,10 +31,20 @@ export default class AnswerPrint extends React.Component {
     }
 
     compute(script: String) {
+        // @ts-ignore
         console.log(script);
-        fetch(`https://simplex-qzx7yzjfkq-ew.a.run.app`)
-            .then(res => res.text())
+        fetch(`https://simplex-qzx7yzjfkq-ew.a.run.app/test`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({script: script}),
+        })
+            .then(res => res.json())
             .then(result => {
+                console.log(result);
+                this.setState({"columns": result.allVariables.map((x: any) => `$${x}$`).concat(["$B$"])});
+                this.setState({"simplexArray": result.data});
                 this.setState({"loaded": true});
             })
     }
@@ -47,9 +57,9 @@ export default class AnswerPrint extends React.Component {
         // @ts-ignore
         return this.state.loaded ? (
             <div>
-                {this.state.simplexArray.map((value) => (
+                {this.state.simplexArray.map((iteration) => (
                     <div>
-                        <h4>Simplex {value}</h4>
+                        <h4>Tableau</h4>
                         <TableContainer component={Paper} className={"my-3 rounded-4"}>
                             <Table sx={{minWidth: 650}} size="small" aria-label="a dense table">
                                 <TableHead>
@@ -60,7 +70,7 @@ export default class AnswerPrint extends React.Component {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {this.state.rows.map((row) => (
+                                    {iteration.map((row) => (
                                         <TableRow
                                             key={row[0]}
                                             sx={{'&:last-child td, &:last-child th': {border: 0}}}
