@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Markdown from "./Markdown.component";
+import {Loader} from "./loader";
 
 export default class AnswerPrint extends React.Component {
     constructor(props: {} | Readonly<{}>) {
@@ -88,6 +89,6 @@ export default class AnswerPrint extends React.Component {
                         </TableContainer>
                     </div>))}
             </div>
-        ) : (<div>Loading</div>)
+        ) : (<Loader></Loader>)
     }
 }
