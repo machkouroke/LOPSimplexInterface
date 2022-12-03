@@ -38,7 +38,7 @@ export const DocsStyle = {
   },
 
   backgroundColor:
-    "linear-gradient(to right bottom, rgb(243, 244, 246), rgb(209, 213, 219))",
+    "white",
 };
 
 export const LANGUAGES = [
