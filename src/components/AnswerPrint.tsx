@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Markdown from "./Markdown.component";
 import {Loader} from "./loader";
-import {Error} from "./Error";
+import {ErrorBox} from "./ErrorBox";
 
 export default class AnswerPrint extends React.Component {
 
@@ -45,7 +45,16 @@ export default class AnswerPrint extends React.Component {
             },
             body: JSON.stringify({script: script}),
         })
-            .then(res => res.json())
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    return response.text().then(text => {
+                        const message = JSON.parse(text).message;
+                        throw new Error(message)
+                    })
+                }
+            })
             .then(result => {
                 console.log(result);
                 this.setState({"columns": result.allVariables.map((x: any) => `$${x}$`).concat(["$B$"])});
@@ -62,7 +71,7 @@ export default class AnswerPrint extends React.Component {
     render() {
 
         const config = {
-            error: <Error message={this.state.error}></Error>, loading: (<Loader></Loader>)
+            error: <ErrorBox message={this.state.error}></ErrorBox>, loading: (<Loader></Loader>)
         }
         if (this.state.answerState === "loaded") {
             return <div>

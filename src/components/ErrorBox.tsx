@@ -1,5 +1,5 @@
 
-export const Error = (props: { message: string }) => {
+export const ErrorBox = (props: { message: string }) => {
     return (
         <div className={"alert alert-danger"} role="alert">
             {props.message}
