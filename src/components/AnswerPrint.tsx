@@ -57,7 +57,7 @@ export default class AnswerPrint extends React.Component {
             })
             .then(result => {
                 console.log(result);
-                this.setState({"columns": result.allVariables.map((x: any) => `$${x}$`).concat(["$B$"])});
+                this.setState({"columns": result.allVariables.map((x: any) => `$${x}$`)});
                 this.setState({"simplexArray": result.data});
                 this.setState({"answerState": "loaded"});
             }).catch(err => {
@@ -79,7 +79,7 @@ export default class AnswerPrint extends React.Component {
                     <div>
                         <h4>Tableau</h4>
                         <TableContainer component={Paper} className={"my-3 rounded-4"}>
-                            <Table sx={{minWidth: 650}} size="small" aria-label="a dense table">
+                            <Table  size="small" aria-label="a dense table">
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>*</TableCell>
