@@ -6,7 +6,7 @@ import 'katex/dist/katex.min.css'
 import Markdown from "./Markdown.component";
 import AnswerPrint from "./AnswerPrint";
 import {BsCloudUpload} from "react-icons/bs";
-import {GrDocumentText} from "react-icons/all";
+import {GoArchive} from "react-icons/all";
 
 import {flipFront} from "../utils.ts/action";
 
@@ -27,10 +27,10 @@ export const Docs = ({content}: CodeEditorProps) => {
                 <div className={"flip-box-back"}>
                     <div className={"buttons py-4"}>
                         <div
-                            className="menu-item"
+                            className="menu-item bg-dark text-white"
                             onClick={() => flipFront()}
                         >
-                            <GrDocumentText size={20}/>
+                            <GoArchive size={20}/>
                             Docs
                         </div>
                         <div
