@@ -26,7 +26,7 @@ export const CodeEditorStyle = {
 export const DocsStyle = {
   codeTheme: lightTheme,
   root: {
-    fontFamily: '"Georgia"',
+    fontFamily: '"Roboto"',
     fontSize: 16,
     ...lightTheme.plain,
 
