@@ -73,6 +73,7 @@ constraints: |
 Enfin pour exprimer le système d'inégalité, vous pouviez utiliser la syntaxe suivante:
 
 - `<=` , `>=` `=` pour un système contenant des inégalité homogène(Vous précisez juste le symbole une fois)
+
 **Exemple de l'agriculteur**
 
 ```
