@@ -8,15 +8,18 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Markdown from "./Markdown.component";
 import {Loader} from "./loader";
+import {Error} from "./Error";
 
 export default class AnswerPrint extends React.Component {
-    constructor(props: {} | Readonly<{}>) {
+
+
+    constructor(props) {
         super(props);
         // @ts-ignore
         window.printer = this;
 
         this.state = {
-            loaded: false,
+            answerState: "loading",
             script: "",
             columns: ["$x_1$", "$x_2$", "$x_3$",
                 "$e_1$", "$B$"],
@@ -26,6 +29,7 @@ export default class AnswerPrint extends React.Component {
                 ['$x_3$', 262, 16.0, 24, 6.0, 9],
                 ['$c_j$', 305, 3.7, 67, 4.3, 10],
             ],
+            error: "",
             simplexArray: [1, 2, 3, 6, 7]
         }
         this.compute = this.compute.bind(this);
@@ -46,18 +50,22 @@ export default class AnswerPrint extends React.Component {
                 console.log(result);
                 this.setState({"columns": result.allVariables.map((x: any) => `$${x}$`).concat(["$B$"])});
                 this.setState({"simplexArray": result.data});
-                this.setState({"loaded": true});
-            })
+                this.setState({"answerState": "loaded"});
+            }).catch(err => {
+            console.log(err);
+            this.setState({"answerState": "error", "error": err.message});
+        })
     }
 
 
     // @ts-ignore
     render() {
 
-
-        // @ts-ignore
-        return this.state.loaded ? (
-            <div>
+        const config = {
+            error: <Error message={this.state.error}></Error>, loading: (<Loader></Loader>)
+        }
+        if (this.state.answerState === "loaded") {
+            return <div>
                 {this.state.simplexArray.map((iteration) => (
                     <div>
                         <h4>Tableau</h4>
@@ -89,6 +97,8 @@ export default class AnswerPrint extends React.Component {
                         </TableContainer>
                     </div>))}
             </div>
-        ) : (<Loader></Loader>)
+        }
+        // @ts-ignore
+        return config[this.state.answerState]
     }
 }
