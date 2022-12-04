@@ -10,10 +10,22 @@ import Markdown from "./Markdown.component";
 import {Loader} from "./loader";
 import {ErrorBox} from "./ErrorBox";
 
-export default class AnswerPrint extends React.Component {
+interface AnswerPrintProps {
+}
+
+interface AnswerPrintState {
+    answerState: string;
+    script: string;
+    columns: string[];
+    rows: any[][];
+    error: string;
+    simplexArray: Array<Array>;
+}
+
+export default class AnswerPrint extends React.Component<AnswerPrintProps, AnswerPrintState> {
 
 
-    constructor(props) {
+    constructor(props: AnswerPrintProps) {
         super(props);
         // @ts-ignore
         window.printer = this;
@@ -21,13 +33,12 @@ export default class AnswerPrint extends React.Component {
         this.state = {
             answerState: "loading",
             script: "",
-            columns: ["$x_1$", "$x_2$", "$x_3$",
-                "$e_1$", "$B$"],
+            columns: [],
             rows: [
-                ['$x_1$', 158, 6.0, 24, 4.0, 7],
-                ['$x_2$', 237, 9.0, 37, 4.3, 8],
-                ['$x_3$', 262, 16.0, 24, 6.0, 9],
-                ['$c_j$', 305, 3.7, 67, 4.3, 10],
+                // ['$x_1$', 158, 6.0, 24, 4.0, 7],
+                // ['$x_2$', 237, 9.0, 37, 4.3, 8],
+                // ['$x_3$', 262, 16.0, 24, 6.0, 9],
+                // ['$c_j$', 305, 3.7, 67, 4.3, 10],
             ],
             error: "",
             simplexArray: [1, 2, 3, 6, 7]
@@ -38,7 +49,7 @@ export default class AnswerPrint extends React.Component {
     compute(script: String) {
         // @ts-ignore
         console.log(script);
-        fetch(`https://simplex-qzx7yzjfkq-ew.a.run.app/test`, {
+        fetch(`https://simplex-qzx7yzjfkq-ew.a.run.app/solve`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -75,11 +86,11 @@ export default class AnswerPrint extends React.Component {
         }
         if (this.state.answerState === "loaded") {
             return <div>
-                {this.state.simplexArray.map((iteration) => (
+                {this.state.simplexArray.map((iteration, index) => (
                     <div>
-                        <h4>Tableau</h4>
+                        <h4 className={"text-center"}>Tableau {index + 1}</h4>
                         <TableContainer component={Paper} className={"my-3 rounded-4"}>
-                            <Table  size="small" aria-label="a dense table">
+                            <Table size="small" aria-label="a dense table">
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>*</TableCell>
