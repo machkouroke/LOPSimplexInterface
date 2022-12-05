@@ -52,7 +52,7 @@ export default class AnswerPrint extends React.Component<AnswerPrintProps, Answe
 
     compute(script: String) {
         // @ts-ignore
-        console.log(script);
+        this.setState({"answerState": "loading"});
         fetch(`https://simplex-qzx7yzjfkq-ew.a.run.app/solve`, {
             method: 'POST',
             headers: {
@@ -122,17 +122,20 @@ export default class AnswerPrint extends React.Component<AnswerPrintProps, Answe
                             </Table>
                         </TableContainer>
                     </div>))}
-                <div
-                    className="container"
-                    style={{
-                        backgroundImage: textAreaBackground,
-                    }}>
-                    <CodeEditor isDarkTheme={true} content={this.state.solution}/>
+                <div>
+
+                    <h4 className={"text-center"}>Solution</h4>
+                    <div>{Object.entries(JSON.parse(this.state.solution)).map((entries) => {
+                        return <Markdown>
+                            {`$${entries[0]} = ${entries[1]}$`}
+                        </Markdown>
+                    })}</div>
+
                 </div>
             </div>
 
         }
-        // @ts-ignore
-        return config[this.state.answerState]
-    }
-}
+            // @ts-ignore
+            return config[this.state.answerState]
+        }
+        }
