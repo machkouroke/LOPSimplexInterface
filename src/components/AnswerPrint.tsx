@@ -9,6 +9,8 @@ import Paper from '@mui/material/Paper';
 import Markdown from "./Markdown.component";
 import {Loader} from "./loader";
 import {ErrorBox} from "./ErrorBox";
+import {CodeEditor} from "./CodeEditor";
+import {CodeEditorStyle, DocsStyle} from "../utils.ts/constant";
 
 interface AnswerPrintProps {
 }
@@ -20,6 +22,7 @@ interface AnswerPrintState {
     rows: any[][];
     error: string;
     simplexArray: Array<Array>;
+    solution: string;
 }
 
 export default class AnswerPrint extends React.Component<AnswerPrintProps, AnswerPrintState> {
@@ -41,6 +44,7 @@ export default class AnswerPrint extends React.Component<AnswerPrintProps, Answe
                 // ['$c_j$', 305, 3.7, 67, 4.3, 10],
             ],
             error: "",
+            solution: "",
             simplexArray: [1, 2, 3, 6, 7]
         }
         this.compute = this.compute.bind(this);
@@ -71,6 +75,7 @@ export default class AnswerPrint extends React.Component<AnswerPrintProps, Answe
                 this.setState({"columns": result.allVariables.map((x: any) => `$${x}$`)});
                 this.setState({"simplexArray": result.data});
                 this.setState({"answerState": "loaded"});
+                this.setState({"solution": JSON.stringify(result.answer)});
             }).catch(err => {
             console.log(err);
             this.setState({"answerState": "error", "error": err.message});
@@ -84,6 +89,7 @@ export default class AnswerPrint extends React.Component<AnswerPrintProps, Answe
         const config = {
             error: <ErrorBox message={this.state.error}></ErrorBox>, loading: (<Loader></Loader>)
         }
+        const textAreaBackground = CodeEditorStyle.backgroundColor;
         if (this.state.answerState === "loaded") {
             return <div>
                 {this.state.simplexArray.map((iteration, index) => (
@@ -105,7 +111,7 @@ export default class AnswerPrint extends React.Component<AnswerPrintProps, Answe
                                             sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                         >
                                             <TableCell component="th" scope="row">
-                                                {<Markdown>{row[0]}</Markdown>}
+                                                {<Markdown>{"$" + row[0] + "$"}</Markdown>}
                                             </TableCell>
                                             {row.slice(1).map((value) => (
                                                 <TableCell align="right">{value}</TableCell>
@@ -116,7 +122,15 @@ export default class AnswerPrint extends React.Component<AnswerPrintProps, Answe
                             </Table>
                         </TableContainer>
                     </div>))}
+                <div
+                    className="container"
+                    style={{
+                        backgroundImage: textAreaBackground,
+                    }}>
+                    <CodeEditor isDarkTheme={true} content={this.state.solution}/>
+                </div>
             </div>
+
         }
         // @ts-ignore
         return config[this.state.answerState]
